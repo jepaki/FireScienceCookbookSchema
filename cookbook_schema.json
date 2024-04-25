@@ -1,6 +1,50 @@
 [
   {
     "$defs": {
+      "Answer": {
+        "properties": {
+          "eco_context": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/EcoContext"
+              }
+            ],
+            "description": "Ecoregion answer applies to"
+          },
+          "case_studies": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/CaseStudy"
+              }
+            ],
+            "description": "The case studies to which the question applies"
+          },
+          "data_inputs": {
+            "description": "The science inputs to which the question applies",
+            "items": {
+              "$ref": "#/$defs/DataProduct"
+            },
+            "title": "Data Inputs",
+            "type": "array"
+          },
+          "processing_methods": {
+            "description": "How to process data inputs",
+            "items": {
+              "$ref": "#/$defs/ProcessingMethod"
+            },
+            "title": "Processing Methods",
+            "type": "array"
+          }
+        },
+        "required": [
+          "eco_context",
+          "case_studies",
+          "data_inputs",
+          "processing_methods"
+        ],
+        "title": "Answer",
+        "type": "object"
+      },
       "CaseStudy": {
         "properties": {
           "name": {
@@ -13,28 +57,27 @@
             "title": "Description",
             "type": "string"
           },
-          "case_study": {
+          "reference": {
             "anyOf": [
               {
-                "type": "string"
+                "$ref": "#/$defs/ReferenceModel"
               },
               {
                 "type": "null"
               }
             ],
-            "default": null,
-            "description": "The name of the case study",
-            "title": "Case Study"
+            "description": "Reference for the case study"
           }
         },
         "required": [
           "name",
-          "description"
+          "description",
+          "reference"
         ],
         "title": "CaseStudy",
         "type": "object"
       },
-      "ScienceInput": {
+      "DataProduct": {
         "properties": {
           "name": {
             "description": "The name of the science input",
@@ -58,13 +101,167 @@
             "default": null,
             "description": "The name of the science input",
             "title": "Science Input"
+          },
+          "reference": {
+            "description": "The reference model for the science input",
+            "items": {
+              "$ref": "#/$defs/ReferenceModel"
+            },
+            "title": "Reference",
+            "type": "array"
+          },
+          "data_source": {
+            "description": "Where this data comes from",
+            "items": {
+              "$ref": "#/$defs/DataSource"
+            },
+            "title": "Data Source",
+            "type": "array"
+          },
+          "processing_methods": {
+            "description": "How to process data inputs",
+            "items": {
+              "$ref": "#/$defs/ProcessingMethod"
+            },
+            "title": "Processing Methods",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "reference",
+          "data_source",
+          "processing_methods"
+        ],
+        "title": "DataProduct",
+        "type": "object"
+      },
+      "DataSource": {
+        "properties": {
+          "name": {
+            "description": "The name of the data source",
+            "title": "Name",
+            "type": "string"
+          },
+          "platform_type": {
+            "description": "Platform type (satellite, ground sensor, etc.",
+            "title": "Platform Type",
+            "type": "string"
+          },
+          "references": {
+            "description": "References describing the source",
+            "items": {
+              "$ref": "#/$defs/ReferenceModel"
+            },
+            "title": "References",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "platform_type",
+          "references"
+        ],
+        "title": "DataSource",
+        "type": "object"
+      },
+      "EcoContext": {
+        "properties": {
+          "region": {
+            "description": "Region answer applies to",
+            "title": "Region",
+            "type": "string"
+          },
+          "ecosystem": {
+            "description": "Ecosystem answer applies to",
+            "title": "Ecosystem",
+            "type": "string"
+          },
+          "weather": {
+            "description": "Weather answer applies to",
+            "title": "Weather",
+            "type": "string"
+          }
+        },
+        "required": [
+          "region",
+          "ecosystem",
+          "weather"
+        ],
+        "title": "EcoContext",
+        "type": "object"
+      },
+      "ProcessingMethod": {
+        "properties": {
+          "name": {
+            "description": "Name of the processing method",
+            "title": "Name",
+            "type": "string"
+          },
+          "reference": {
+            "description": "The reference model for the science input",
+            "items": {
+              "$ref": "#/$defs/ReferenceModel"
+            },
+            "title": "Reference",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "reference"
+        ],
+        "title": "ProcessingMethod",
+        "type": "object"
+      },
+      "ReferenceModel": {
+        "properties": {
+          "name": {
+            "description": "The name of the reference",
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "description": "A description of the reference model",
+            "title": "Description",
+            "type": "string"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "URL for reference",
+            "title": "Url"
+          },
+          "citation": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "citations",
+            "title": "Citation"
           }
         },
         "required": [
           "name",
           "description"
         ],
-        "title": "ScienceInput",
+        "title": "ReferenceModel",
         "type": "object"
       }
     },
@@ -76,33 +273,18 @@
       },
       "answer": {
         "description": "The answer to the question",
-        "title": "Answer",
-        "type": "string"
-      },
-      "case_studies": {
-        "allOf": [
-          {
-            "$ref": "#/$defs/CaseStudy"
-          }
-        ],
-        "description": "The case studies to which the question applies"
-      },
-      "science_inputs": {
-        "description": "The science inputs to which the question applies",
         "items": {
-          "$ref": "#/$defs/ScienceInput"
+          "$ref": "#/$defs/Answer"
         },
-        "title": "Science Inputs",
+        "title": "Answer",
         "type": "array"
       }
     },
     "required": [
       "question",
-      "answer",
-      "case_studies",
-      "science_inputs"
+      "answer"
     ],
-    "title": "QuestionModel",
+    "title": "Question",
     "type": "object"
   }
 ]

@@ -15,7 +15,7 @@ import sys
 # Define PYTHONPATH
 
 schema_file = "cookbook_schema.py"
-root_models = ["QuestionModel"]
+root_models = ["Question"]
 
 # Get the output directory
 fn = Path(schema_file)
