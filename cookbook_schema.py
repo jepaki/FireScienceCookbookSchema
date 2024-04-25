@@ -23,6 +23,10 @@ class CaseStudy(BaseModel):
     reference: Optional[ReferenceModel] = Field(..., description="Reference for the case study")
 
 
+class Audience(BaseModel):
+    name: str = Field(..., description="Name of the audience")
+
+
 class ProcessingMethod(BaseModel):
     name: str = Field(..., description="Name of the processing method")
     reference: list[ReferenceModel] = Field(..., description="The reference model for the science input")
@@ -59,6 +63,7 @@ class Answer(BaseModel):
 class Question(BaseModel):
     question: str = Field(..., description="The question to be answered")
     answer: list[Answer] = Field(..., description="The answer to the question")
+    context: str = Field(..., description="Context for question, e.x. land management, research")
 
 
 

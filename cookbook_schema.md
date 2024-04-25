@@ -5,6 +5,7 @@
 - **`question`** *(string)*: The question to be answered.
 - **`answer`** *(array)*: The answer to the question.
   - **Items**: Refer to *[Answer](#%24defs/Answer)*.
+- **`context`** *(string)*: Context for question, e.x. land management, research.
 ### Definitions
 
 - <a id="%24defs/Answer"></a>**`Answer`** *(object)*

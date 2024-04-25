@@ -278,11 +278,17 @@
         },
         "title": "Answer",
         "type": "array"
+      },
+      "context": {
+        "description": "Context for question, e.x. land management, research",
+        "title": "Context",
+        "type": "string"
       }
     },
     "required": [
       "question",
-      "answer"
+      "answer",
+      "context"
     ],
     "title": "Question",
     "type": "object"
