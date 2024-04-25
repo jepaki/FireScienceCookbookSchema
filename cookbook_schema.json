@@ -1,0 +1,108 @@
+[
+  {
+    "$defs": {
+      "CaseStudy": {
+        "properties": {
+          "name": {
+            "description": "The name of the case study",
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "description": "A description of the case study",
+            "title": "Description",
+            "type": "string"
+          },
+          "case_study": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The name of the case study",
+            "title": "Case Study"
+          }
+        },
+        "required": [
+          "name",
+          "description"
+        ],
+        "title": "CaseStudy",
+        "type": "object"
+      },
+      "ScienceInput": {
+        "properties": {
+          "name": {
+            "description": "The name of the science input",
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "description": "A description of the science input",
+            "title": "Description",
+            "type": "string"
+          },
+          "science_input": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The name of the science input",
+            "title": "Science Input"
+          }
+        },
+        "required": [
+          "name",
+          "description"
+        ],
+        "title": "ScienceInput",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "question": {
+        "description": "The question to be answered",
+        "title": "Question",
+        "type": "string"
+      },
+      "answer": {
+        "description": "The answer to the question",
+        "title": "Answer",
+        "type": "string"
+      },
+      "case_studies": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/CaseStudy"
+          }
+        ],
+        "description": "The case studies to which the question applies"
+      },
+      "science_inputs": {
+        "description": "The science inputs to which the question applies",
+        "items": {
+          "$ref": "#/$defs/ScienceInput"
+        },
+        "title": "Science Inputs",
+        "type": "array"
+      }
+    },
+    "required": [
+      "question",
+      "answer",
+      "case_studies",
+      "science_inputs"
+    ],
+    "title": "QuestionModel",
+    "type": "object"
+  }
+]

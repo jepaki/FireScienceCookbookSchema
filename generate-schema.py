@@ -1,6 +1,6 @@
 """
 Script to generate JSON schemas and markdown documentation from pydantic models.
-Usage: python scripts/generate-schema.py <schema_file.py> <RootModel>
+Usage: python scripts/generate-cookbook_schema.py <schema_file.py> <RootModel>
 
 """
 # sudo apt install libgraphviz-dev
@@ -14,8 +14,8 @@ import sys
 
 # Define PYTHONPATH
 
-schema_file = "/home/oryx/PycharmProjects/FireScienceCookbook/FireScienceCookbookSchema/schema.py"
-root_models = ["ProspectivityModel"]
+schema_file = "cookbook_schema.py"
+root_models = ["QuestionModel"]
 
 # Get the output directory
 fn = Path(schema_file)
