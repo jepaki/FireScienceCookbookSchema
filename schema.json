@@ -1,0 +1,31 @@
+[
+  {
+    "properties": {
+      "bounds": {
+        "description": "Bounding box of the tile scheme",
+        "items": {
+          "type": "number"
+        },
+        "title": "Bounds",
+        "type": "array"
+      },
+      "crs": {
+        "description": "Coordinate reference system of the tile scheme",
+        "title": "Crs",
+        "type": "string"
+      },
+      "resolution": {
+        "description": "Resolution of the output prospectivity raster",
+        "title": "Resolution",
+        "type": "number"
+      }
+    },
+    "required": [
+      "bounds",
+      "crs",
+      "resolution"
+    ],
+    "title": "ProspectivityModel",
+    "type": "object"
+  }
+]
